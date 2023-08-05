@@ -1,0 +1,6 @@
+Event:
+1. Event State: a) Logic by Staring & Ending Date (Upcoming, Ongoing, Ended, Canceled)
+2. Check Membership Validity.
+
+CreatorMembership:
+1. Monthly Subscription.

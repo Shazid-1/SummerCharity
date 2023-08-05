@@ -5,3 +5,6 @@ SummerCharity/bin/Debug/
 BLL/obj/Debug/
 DAL/obj/Debug/
 SummerCharity/obj/Debug/
+BLL/obj/Release/
+DAL/obj/Release/
+SummerCharity/obj/Release/
