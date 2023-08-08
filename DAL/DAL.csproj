@@ -55,7 +55,7 @@
     <Compile Include="DataAccessFactory.cs" />
     <Compile Include="EF\Models\Admin.cs" />
     <Compile Include="EF\Models\Creator.cs" />
-    <Compile Include="EF\Models\CreatorMembership.cs" />
+    <Compile Include="EF\Models\MembershipCreator.cs" />
     <Compile Include="EF\Models\Donator.cs" />
     <Compile Include="EF\Models\Event.cs" />
     <Compile Include="EF\Models\EventDonator.cs" />

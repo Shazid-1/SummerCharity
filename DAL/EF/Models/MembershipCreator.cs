@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace DAL.EF.Models
 {
-    public class CreatorMembership
+    public class MembershipCreator
     {
         public int Id { get; set; }
         public DateTime Validity { get; set; }
         [ForeignKey("Creator")] public int CId { get; set; }
-        public virtual Creator Creator { get; set; }
         [ForeignKey("Membership")] public int MId { get; set; }
-        public virtual Membership Membership { get; set; } 
+        public virtual Creator Creator { get; set; }
+        public virtual Membership Membership { get; set; }
     }
 }

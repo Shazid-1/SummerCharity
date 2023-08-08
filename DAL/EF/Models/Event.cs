@@ -16,9 +16,9 @@ namespace DAL.EF.Models
         public DateTime EndAt { get; set; }
         public int Goal { get; set; }
         public int Fund { get; set; }
-        [ForeignKey("Admin")] public int AId { get; set; }
+        [ForeignKey("Admin")] public int? AId { get; set; }
         [ForeignKey("Creator")] public int CId { get; set; }
-        public Admin Admin { get; set; }
-        public Creator Creator { get; set; }
+        public virtual Admin Admin { get; set; }
+        public virtual Creator Creator { get; set; }
     }
 }
