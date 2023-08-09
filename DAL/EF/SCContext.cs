@@ -12,5 +12,11 @@ namespace DAL.EF
     {
         public DbSet<Creator> Creators {  get; set; }
         public DbSet<Membership> Memberships {  get; set; }
+
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Donator> Donators { get; set; }
+        public DbSet<Event> Events { get; set; }
+
+        public DbSet<EventDonator> EventDonators { get; set; }
     }
 }
