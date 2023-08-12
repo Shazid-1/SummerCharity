@@ -64,6 +64,7 @@
     <Compile Include="EF\Models\Token.cs" />
     <Compile Include="EF\Models\User.cs" />
     <Compile Include="EF\SCContext.cs" />
+    <Compile Include="Interfaces\IAuth.cs" />
     <Compile Include="Interfaces\IRepo.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,8 +73,12 @@
     <Compile Include="Repos\DonatorRepo.cs" />
     <Compile Include="Repos\EventDonatorRepo.cs" />
     <Compile Include="Repos\EventRepo.cs" />
+    <Compile Include="Repos\MembershipCreatorRepo.cs" />
     <Compile Include="Repos\MembershipRepo.cs" />
     <Compile Include="Repos\Repo.cs" />
+    <Compile Include="Repos\RoleRepo.cs" />
+    <Compile Include="Repos\TokenRepo.cs" />
+    <Compile Include="Repos\UserRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
