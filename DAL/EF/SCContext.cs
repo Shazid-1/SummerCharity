@@ -18,5 +18,9 @@ namespace DAL.EF
         public DbSet<Event> Events { get; set; }
 
         public DbSet<EventDonator> EventDonators { get; set; }
+        public DbSet<MembershipCreator> MembershipCreators { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Token> Tokens { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
