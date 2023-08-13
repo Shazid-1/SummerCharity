@@ -19,7 +19,7 @@ namespace DAL.Repos
         public bool Delete(int id)
         {
             //finding the deletable data
-            var data = db.Admins.Find(id);
+            var data = Get(id);
 
             db.Admins.Remove(data);
             return db.SaveChanges() > 0;
@@ -37,7 +37,7 @@ namespace DAL.Repos
 
         public bool Update(Admin obj)
         {
-            var data = db.Admins.Find(obj.Id);
+            var data = Get(obj.Id);
             //corresponding function checks for data and sets to set values
             db.Entry(data).CurrentValues.SetValues(obj);
 
