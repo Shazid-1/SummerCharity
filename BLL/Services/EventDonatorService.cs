@@ -10,43 +10,43 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class EventEventDonatorService
+    public class EventDonatorService
     {
         //get all Donator 
-        public static List<EventDonatorDto> Get()
+        public static List<EventDonatorDTO> Get()
         {
             var data = DataAccessFactory.EventDonatorData().Get();
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<EventDonator, DonatorDto>();
+                cfg.CreateMap<EventDonator, DonatorDTO>();
             });
             var mapper = new Mapper(config);
-            var con = mapper.Map<List<EventDonatorDto>>(data);
+            var con = mapper.Map<List<EventDonatorDTO>>(data);
             return con;
         }
 
         //get single Donator
-        public static EventDonatorDto Get(int id)
+        public static EventDonatorDTO Get(int id)
         {
             var data = DataAccessFactory.EventDonatorData().Get(id);
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<EventDonator, EventDonatorDto>();
+                cfg.CreateMap<EventDonator, EventDonatorDTO>();
             });
 
             var mapper = new Mapper(config);
-            var con = mapper.Map<EventDonatorDto>(data);
+            var con = mapper.Map<EventDonatorDTO>(data);
             return con;
         }
 
         //Create Donator 
-        public static bool Create(EventDonatorDto obj)
+        public static bool Create(EventDonatorDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<EventDonatorDto, EventDonator>();
+                cfg.CreateMap<EventDonatorDTO, EventDonator>();
             });
 
             var mapper = new Mapper(config);
@@ -62,11 +62,11 @@ namespace BLL.Services
         }
 
         //Update Donator
-        public static bool Update(EventDonatorDto obj)
+        public static bool Update(EventDonatorDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<EventDonatorDto, EventDonator>();
+                cfg.CreateMap<EventDonatorDTO, EventDonator>();
             });
             var mapper = new Mapper(config);
             var con = mapper.Map<EventDonator>(obj);

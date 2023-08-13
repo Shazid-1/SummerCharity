@@ -13,40 +13,40 @@ namespace BLL.Services
     public class DonatorService
     {
         //get all Donator 
-        public static List<DonatorDto> Get()
+        public static List<DonatorDTO> Get()
         {
             var data = DataAccessFactory.DonatorData().Get();
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Donator, DonatorDto>();
+                cfg.CreateMap<Donator, DonatorDTO>();
             });
             var mapper = new Mapper(config);
-            var con = mapper.Map<List<DonatorDto>>(data);
+            var con = mapper.Map<List<DonatorDTO>>(data);
             return con;
         }
 
         //get single Donator
-        public static DonatorDto Get(int id)
+        public static DonatorDTO Get(int id)
         {
             var data = DataAccessFactory.DonatorData().Get(id);
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Donator, DonatorDto>();
+                cfg.CreateMap<Donator, DonatorDTO>();
             });
 
             var mapper = new Mapper(config);
-            var con = mapper.Map<DonatorDto>(data);
+            var con = mapper.Map<DonatorDTO>(data);
             return con;
         }
 
         //Create Donator 
-        public static bool Create(DonatorDto obj)
+        public static bool Create(DonatorDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<DonatorDto, Donator>();
+                cfg.CreateMap<DonatorDTO, Donator>();
             });
 
             var mapper = new Mapper(config);
@@ -62,11 +62,11 @@ namespace BLL.Services
         }
 
         //Update Donator
-        public static bool Update(DonatorDto obj)
+        public static bool Update(DonatorDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<DonatorDto, Donator>();
+                cfg.CreateMap<DonatorDTO, Donator>();
             });
             var mapper = new Mapper(config);
             var con = mapper.Map<Donator>(obj);

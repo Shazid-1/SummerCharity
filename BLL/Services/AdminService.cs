@@ -13,40 +13,40 @@ namespace BLL.Services
     public class AdminService
     {
         //get all admin 
-        public static List<AdminDto>Get()
+        public static List<AdminDTO>Get()
         {
             var data = DataAccessFactory.AdminData().Get();
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Admin, AdminDto>();
+                cfg.CreateMap<Admin, AdminDTO>();
             });
             var mapper = new Mapper(config);
-            var con = mapper.Map<List<AdminDto>>(data);
+            var con = mapper.Map<List<AdminDTO>>(data);
             return con;
         }
 
         //get single admin
-        public static AdminDto Get(int id)
+        public static AdminDTO Get(int id)
         {
             var data = DataAccessFactory.AdminData().Get(id);
             
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Admin, AdminDto>();
+                cfg.CreateMap<Admin, AdminDTO>();
             });
 
             var mapper = new Mapper(config);
-            var con = mapper.Map<AdminDto>(data);
+            var con = mapper.Map<AdminDTO>(data);
             return con;
         }
 
         //Create Admin 
-        public static bool Create(AdminDto obj)
+        public static bool Create(AdminDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<AdminDto, Admin>();
+                cfg.CreateMap<AdminDTO, Admin>();
             });
 
             var mapper = new Mapper(config);
@@ -62,11 +62,11 @@ namespace BLL.Services
         }
 
         //Update Admin
-        public static bool Update(AdminDto obj)
+        public static bool Update(AdminDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<AdminDto, Admin>();
+                cfg.CreateMap<AdminDTO, Admin>();
             });
             var mapper = new Mapper(config);
             var con = mapper.Map<Admin>(obj);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.DTOs
 {
-    public class CreatorDto
+    public class CreatorDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -13,40 +13,40 @@ namespace BLL.Services
     public class CreatorService
     {
         //get all Creator 
-        public static List<CreatorDto> Get()
+        public static List<CreatorDTO> Get()
         {
             var data = DataAccessFactory.CreatorData().Get();
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Creator, CreatorDto>();
+                cfg.CreateMap<Creator, CreatorDTO>();
             });
             var mapper = new Mapper(config);
-            var con = mapper.Map<List<CreatorDto>>(data);
+            var con = mapper.Map<List<CreatorDTO>>(data);
             return con;
         }
 
         //get single Creator
-        public static CreatorDto Get(int id)
+        public static CreatorDTO Get(int id)
         {
             var data = DataAccessFactory.CreatorData().Get(id);
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Creator, CreatorDto>();
+                cfg.CreateMap<Creator, CreatorDTO>();
             });
 
             var mapper = new Mapper(config);
-            var con = mapper.Map<CreatorDto>(data);
+            var con = mapper.Map<CreatorDTO>(data);
             return con;
         }
 
         //Create Creator 
-        public static bool Create(CreatorDto obj)
+        public static bool Create(CreatorDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<CreatorDto, Creator>();
+                cfg.CreateMap<CreatorDTO, Creator>();
             });
 
             var mapper = new Mapper(config);
@@ -62,11 +62,11 @@ namespace BLL.Services
         }
 
         //Update Creator
-        public static bool Update(CreatorDto obj)
+        public static bool Update(CreatorDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<CreatorDto, Creator>();
+                cfg.CreateMap<CreatorDTO, Creator>();
             });
             var mapper = new Mapper(config);
             var con = mapper.Map<Creator>(obj);

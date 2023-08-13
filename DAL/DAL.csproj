@@ -65,6 +65,10 @@
     <Compile Include="EF\Models\User.cs" />
     <Compile Include="EF\SCContext.cs" />
     <Compile Include="Interfaces\IRepo.cs" />
+    <Compile Include="Migrations\202308130653311_DATABASEINITTABLEADDEDALL.cs" />
+    <Compile Include="Migrations\202308130653311_DATABASEINITTABLEADDEDALL.designer.cs">
+      <DependentUpon>202308130653311_DATABASEINITTABLEADDEDALL.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\AdminRepo.cs" />
@@ -79,7 +83,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202308130653311_DATABASEINITTABLEADDEDALL.resx">
+      <DependentUpon>202308130653311_DATABASEINITTABLEADDEDALL.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

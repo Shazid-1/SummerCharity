@@ -13,40 +13,40 @@ namespace BLL.Services
     public class EventService
     {
         //get all Event 
-        public static List<EventDto> Get()
+        public static List<EventDTO> Get()
         {
             var data = DataAccessFactory.EventData().Get();
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Event, EventDto>();
+                cfg.CreateMap<Event, EventDTO>();
             });
             var mapper = new Mapper(config);
-            var con = mapper.Map<List<EventDto>>(data);
+            var con = mapper.Map<List<EventDTO>>(data);
             return con;
         }
 
         //get single Event
-        public static EventDto Get(int id)
+        public static EventDTO Get(int id)
         {
             var data = DataAccessFactory.EventData().Get(id);
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Event, EventDto>();
+                cfg.CreateMap<Event, EventDTO>();
             });
 
             var mapper = new Mapper(config);
-            var con = mapper.Map<EventDto>(data);
+            var con = mapper.Map<EventDTO>(data);
             return con;
         }
 
         //Create Event 
-        public static bool Create(EventDto obj)
+        public static bool Create(EventDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<EventDto, Event>();
+                cfg.CreateMap<EventDTO, Event>();
             });
 
             var mapper = new Mapper(config);
@@ -62,11 +62,11 @@ namespace BLL.Services
         }
 
         //Update Event
-        public static bool Update(EventDto obj)
+        public static bool Update(EventDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<EventDto, Event>();
+                cfg.CreateMap<EventDTO, Event>();
             });
             var mapper = new Mapper(config);
             var con = mapper.Map<Event>(obj);
