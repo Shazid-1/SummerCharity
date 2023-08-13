@@ -18,7 +18,7 @@ namespace DAL.Repos
 
         public bool Delete(int id)
         {
-            var data = db.Donators.Find(id);
+            var data = Get(id);
             db.Donators.Remove(data);
             return db.SaveChanges() > 0;
         }
@@ -35,7 +35,7 @@ namespace DAL.Repos
 
         public bool Update(Donator obj)
         {
-            var data = db.Donators.Find(obj.Id);
+            var data = Get(obj.Id);
 
             db.Entry(data).CurrentValues.SetValues(obj);
             return db.SaveChanges() > 0;
