@@ -30,7 +30,11 @@ namespace DAL.Repos
 
         public User Get(string username)
         {
-            return db.Users.Find(username);
+            var user = from u in db.Users
+                       where u.Username.Equals(username)
+                       select u;
+            if (user != null) return user.SingleOrDefault();
+            return null;
         }
 
         public bool Update(User obj)

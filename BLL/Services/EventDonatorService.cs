@@ -15,7 +15,7 @@ namespace BLL.Services
         //get all Donator 
         public static List<EventDonatorDTO> Get()
         {
-            var data = DataAccessFactory.EventDonatorData().Get();
+            var data = DataAccess.EventDonatorData().Get();
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -29,7 +29,7 @@ namespace BLL.Services
         //get single Donator
         public static EventDonatorDTO Get(int id)
         {
-            var data = DataAccessFactory.EventDonatorData().Get(id);
+            var data = DataAccess.EventDonatorData().Get(id);
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -52,13 +52,13 @@ namespace BLL.Services
             var mapper = new Mapper(config);
             var con = mapper.Map<EventDonator>(obj);
 
-            return DataAccessFactory.EventDonatorData().Create(con);
+            return DataAccess.EventDonatorData().Create(con);
         }
 
         //Delete Donator
         public static bool Delete(int id)
         {
-            return DataAccessFactory.EventDonatorData().Delete(id);
+            return DataAccess.EventDonatorData().Delete(id);
         }
 
         //Update Donator
@@ -71,7 +71,7 @@ namespace BLL.Services
             var mapper = new Mapper(config);
             var con = mapper.Map<EventDonator>(obj);
 
-            return DataAccessFactory.EventDonatorData().Update(con);
+            return DataAccess.EventDonatorData().Update(con);
         }
     }
 }
