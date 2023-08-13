@@ -65,9 +65,9 @@
     <Compile Include="EF\Models\User.cs" />
     <Compile Include="EF\SCContext.cs" />
     <Compile Include="Interfaces\IRepo.cs" />
-    <Compile Include="Migrations\202308130653311_DATABASEINITTABLEADDEDALL.cs" />
-    <Compile Include="Migrations\202308130653311_DATABASEINITTABLEADDEDALL.designer.cs">
-      <DependentUpon>202308130653311_DATABASEINITTABLEADDEDALL.cs</DependentUpon>
+    <Compile Include="Migrations\202308131522300_DbInitTableAdded.cs" />
+    <Compile Include="Migrations\202308131522300_DbInitTableAdded.designer.cs">
+      <DependentUpon>202308131522300_DbInitTableAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,8 +84,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202308130653311_DATABASEINITTABLEADDEDALL.resx">
-      <DependentUpon>202308130653311_DATABASEINITTABLEADDEDALL.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202308131522300_DbInitTableAdded.resx">
+      <DependentUpon>202308131522300_DbInitTableAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

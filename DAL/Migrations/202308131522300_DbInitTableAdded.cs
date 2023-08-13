@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class DATABASEINITTABLEADDEDALL : DbMigration
+    public partial class DbInitTableAdded : DbMigration
     {
         public override void Up()
         {
@@ -57,8 +57,8 @@
                         EId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Donators", t => t.DId, cascadeDelete: true)
-                .ForeignKey("dbo.Events", t => t.EId, cascadeDelete: true)
+                .ForeignKey("dbo.Donators", t => t.DId, cascadeDelete: false)
+                .ForeignKey("dbo.Events", t => t.EId, cascadeDelete: false)
                 .Index(t => t.DId)
                 .Index(t => t.EId);
             
@@ -78,7 +78,7 @@
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Admins", t => t.AId)
-                .ForeignKey("dbo.Creators", t => t.CId, cascadeDelete: true)
+                .ForeignKey("dbo.Creators", t => t.CId, cascadeDelete: false)
                 .Index(t => t.AId)
                 .Index(t => t.CId);
             
