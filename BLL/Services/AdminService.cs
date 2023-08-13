@@ -15,7 +15,7 @@ namespace BLL.Services
         //get all admin 
         public static List<AdminDTO>Get()
         {
-            var data = DataAccessFactory.AdminData().Get();
+            var data = DataAccess.AdminData().Get();
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -29,7 +29,7 @@ namespace BLL.Services
         //get single admin
         public static AdminDTO Get(int id)
         {
-            var data = DataAccessFactory.AdminData().Get(id);
+            var data = DataAccess.AdminData().Get(id);
             
             var config = new MapperConfiguration(cfg =>
             {
@@ -52,13 +52,13 @@ namespace BLL.Services
             var mapper = new Mapper(config);
             var con = mapper.Map<Admin>(obj);
 
-            return DataAccessFactory.AdminData().Create(con);
+            return DataAccess.AdminData().Create(con);
         }
         
         //Delete Admin
         public static bool Delete(int id)
         {
-            return DataAccessFactory.AdminData().Delete(id);
+            return DataAccess.AdminData().Delete(id);
         }
 
         //Update Admin
@@ -71,7 +71,7 @@ namespace BLL.Services
             var mapper = new Mapper(config);
             var con = mapper.Map<Admin>(obj);
 
-            return DataAccessFactory.AdminData().Update(con);
+            return DataAccess.AdminData().Update(con);
         }
     }
 }

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.Services
+namespace BLL.DTOs
 {
-    internal class dummy
+    public class RoleDTO
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

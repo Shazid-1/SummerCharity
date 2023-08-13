@@ -9,6 +9,7 @@ namespace BLL.DTOs
     public class DonatorDTO
     {
         public int Id { get; set; }
+        public string Username { get; set; }
         public string Name { get; set; }
         public int Balance { get; set; }
         public int Age { get; set; }
