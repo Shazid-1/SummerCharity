@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repos
 {
-    internal class CreatorRepo : Repo, IRepo<Creator, int, bool>
+    internal class CreatorRepo : Repo, IUname<Creator, int, bool>
     {
         public bool Create(Creator obj)
         {
@@ -31,6 +31,11 @@ namespace DAL.Repos
         public Creator Get(int id)
         {
             return db.Creators.Find(id);
+        }
+
+        public Creator Get(string uname)
+        {
+            return db.Creators.FirstOrDefault(x => x.Username.Equals(uname));
         }
 
         public bool Update(Creator obj)

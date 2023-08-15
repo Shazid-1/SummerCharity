@@ -50,7 +50,7 @@ namespace BLL.Services
             });
 
             var mapper = new Mapper(config);
-            var RId = DataAccess.RoleData().Get().Find(r => r.Name.Equals("CREATOR")).Id;
+            var RId = DataAccess.RoleData().Get("CREATOR").Id;
             obj.RId = RId;
             var con = mapper.Map<Creator>(obj);
             var conU = mapper.Map<User>(obj);

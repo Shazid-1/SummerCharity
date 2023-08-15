@@ -17,31 +17,51 @@ namespace BLL.Services
             var user = DataAccess.AuthData().Authenticate(uname, pass);
             if (user != null)
             {
-                var token = new Token();
-                token.Key = Guid.NewGuid().ToString();
-                token.Username = user.Username;
-                token.CreatedAt = DateTime.Now;
-                token.ExpiredAt = null;
-                var tk = DataAccess.TokenData().Create(token);
-                var config = new MapperConfiguration(cfg => {
-                    cfg.CreateMap<Token, TokenDTO>();
-                });
-                var mapper = new Mapper(config);
-                var data = mapper.Map<TokenDTO>(tk);
-                return data;
+                var token = GetValidToken(uname);
+                if (token != null) return token;
+                token = CreateValidToken(uname);
+                return token;
             }
             return null;
         }
-        public static bool IsTokenValid(string token)
+        public static TokenDTO CreateValidToken(string uname)
         {
-            var tk = (from t in DataAccess.TokenData().Get()
-                      where t.Key.Equals(token)
-                      && t.ExpiredAt == null
-                      select t).SingleOrDefault();
-            if (tk != null)
+            var token = new Token
             {
-                return true;
-            }
+                Key = Guid.NewGuid().ToString(),
+                Username = uname,
+                CreatedAt = DateTime.Now,
+                ExpiredAt = DateTime.Now.AddMinutes(5)
+            };
+            var tk = DataAccess.TokenData().Create(token);
+            var mapper = MapperService<Token, TokenDTO>.GetMapper();
+            var data = mapper.Map<TokenDTO>(tk);
+            return data;
+        }
+        public static TokenDTO GetValidToken(string uname)
+        {
+            var token = DataAccess.TokenData().Get().Find(t => t.Username.Equals(uname) && t.ExpiredAt > DateTime.Now);
+            if (token == null) return null;
+            var mapper = MapperService<Token, TokenDTO>.GetMapper();
+            var data = mapper.Map<TokenDTO>(token);
+            return data;
+        }
+        public static bool IsValidToken(string token)
+        {
+            var tk = DataAccess.TokenData().Get().Find(t => t.Key.Equals(token) && t.ExpiredAt > DateTime.Now);
+            /*var tk = (from t in DataAccess.TokenData().Get()
+                      where t.Key.Equals(token)
+                      && t.ExpiredAt > DateTime.Now
+                      select t).SingleOrDefault();*/
+            if (tk != null) return true;
+            return false;
+        }
+        public static bool IsRoleToken(string token, string role)
+        {
+            var uname = DataAccess.TokenData().Get().Find(t => t.Key.Equals(token)).Username;
+            var user = DataAccess.UserData().Get(uname);
+            var RId = DataAccess.RoleData().Get(role).Id;
+            if (user.RId == RId) return true;
             return false;
         }
     }
