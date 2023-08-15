@@ -43,12 +43,17 @@ namespace SummerCharity.Controllers
 
         [HttpPost]
         [Route("api/creator/create")]
-        public HttpResponseMessage Create(CreatorDTO creator)
+        public HttpResponseMessage Create(UserCreatorDTO creator)
         {
             try
             {
-                CreatorService.Create(creator);
-                return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Creator Added" });
+                int code = CreatorService.Create(creator);
+                if(code == 3)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Creator Added" });
+                }
+                else return Request.CreateResponse(HttpStatusCode.InternalServerError, new { msg = "Creator was not Added", code });
+
             }
             catch (Exception e)
             {

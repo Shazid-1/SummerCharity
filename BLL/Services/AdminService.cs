@@ -42,17 +42,25 @@ namespace BLL.Services
         }
 
         //Create Admin 
-        public static bool Create(AdminDTO obj)
+        public static int Create(UserAdminDTO obj)
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<AdminDTO, Admin>();
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<UserAdminDTO, Admin>();
+                cfg.CreateMap<UserAdminDTO, User>();
             });
 
             var mapper = new Mapper(config);
+            var RId = DataAccess.RoleData().Get().Find(r => r.Name.Equals("ADMIN")).Id;
+            obj.RId = RId;
             var con = mapper.Map<Admin>(obj);
+            var conU = mapper.Map<User>(obj);
 
-            return DataAccess.AdminData().Create(con);
+            bool Status = DataAccess.AdminData().Create(con);
+            bool StatusU = DataAccess.UserData().Create(conU);
+            if (Status && StatusU) return 3;
+            if (StatusU) return 2;
+            if (Status) return 1;
+            else return 0;
         }
         
         //Delete Admin
