@@ -65,6 +65,7 @@
     <Compile Include="EF\Models\User.cs" />
     <Compile Include="EF\SCContext.cs" />
     <Compile Include="Interfaces\IAuth.cs" />
+    <Compile Include="Interfaces\IUname.cs" />
     <Compile Include="Interfaces\IRepo.cs" />
     <Compile Include="Migrations\202308132158537_DbInit.cs" />
     <Compile Include="Migrations\202308132158537_DbInit.designer.cs">

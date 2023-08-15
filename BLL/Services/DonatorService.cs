@@ -50,7 +50,7 @@ namespace BLL.Services
             });
 
             var mapper = new Mapper(config);
-            var RId = DataAccess.RoleData().Get().Find(r => r.Name.Equals("DONATOR")).Id;
+            var RId = DataAccess.RoleData().Get("DONATOR").Id;
             obj.RId = RId;
             obj.Balance = 1000; // Default 1k balance upon registration for donators
             var con = mapper.Map<Donator>(obj);

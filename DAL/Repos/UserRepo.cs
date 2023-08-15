@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repos
 {
-    internal class UserRepo : Repo, IRepo<User, string, bool>, IAuth
+    internal class UserRepo : Repo, IUname<User, string, bool>, IAuth
     {
         public bool Create(User obj)
         {
@@ -30,11 +30,12 @@ namespace DAL.Repos
 
         public User Get(string username)
         {
-            var user = from u in db.Users
+            /*var user = from u in db.Users
                        where u.Username.Equals(username)
                        select u;
-            if (user != null) return user.SingleOrDefault();
-            return null;
+            if (user != null) return user.SingleOrDefault();*/
+
+            return db.Users.Find(username);
         }
 
         public bool Update(User obj)
@@ -45,11 +46,13 @@ namespace DAL.Repos
         }
         public User Authenticate(string uname, string pass)
         {
-            var user = from u in db.Users
+            var user = db.Users.FirstOrDefault(u => u.Username.Equals(uname) && u.Password.Equals(pass));
+            if (user != null) return user;
+            /*var user = from u in db.Users
                        where u.Username.Equals(uname)
                        && u.Password.Equals(pass)
                        select u;
-            if (user != null) return user.SingleOrDefault();
+            if (user != null) return user.SingleOrDefault();*/
             return null;
         }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repos
 {
-    internal class RoleRepo: Repo, IRepo<Role,int, bool>
+    internal class RoleRepo: Repo, IUname<Role,int, bool>
     {
         public bool Create(Role obj)
         {
@@ -31,6 +31,11 @@ namespace DAL.Repos
         public Role Get(int id)
         {
             return db.Roles.Find(id);
+        }
+
+        public Role Get(string name)
+        {
+            return db.Roles.FirstOrDefault(x => x.Name.Equals(name));
         }
 
         public bool Update(Role obj)

@@ -11,15 +11,15 @@ namespace DAL
 {
     public class DataAccess
     {
-        public static IRepo<Admin,int, bool> AdminData()
+        public static IUname<Admin,int, bool> AdminData()
         {
             return new AdminRepo();
         }
-        public static IRepo<Creator,int, bool> CreatorData()
+        public static IUname<Creator,int, bool> CreatorData()
         {
             return new CreatorRepo();
         }
-        public static IRepo<Donator, int, bool> DonatorData()
+        public static IUname<Donator, int, bool> DonatorData()
         {
             return new DonatorRepo();
         }
@@ -39,7 +39,7 @@ namespace DAL
         {
             return new MembershipCreatorRepo();
         }
-        public static IRepo<Role, int, bool> RoleData()
+        public static IUname<Role, int, bool> RoleData()
         {
             return new RoleRepo();
         }
@@ -47,7 +47,7 @@ namespace DAL
         {
             return new TokenRepo();
         }
-        public static IRepo<User, string, bool> UserData()
+        public static IUname<User, string, bool> UserData()
         {
             return new UserRepo();
         }

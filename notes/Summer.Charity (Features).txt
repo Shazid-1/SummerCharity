@@ -1,3 +1,6 @@
+Login:
+1. Expired after 5 minutes.
+
 Event:
 1. Event State: a) Logic by Staring & Ending Date (Upcoming, Ongoing, Ended, Canceled)
 2. Check Membership Validity.

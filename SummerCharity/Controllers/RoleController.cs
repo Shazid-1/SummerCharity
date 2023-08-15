@@ -1,5 +1,6 @@
 ﻿using BLL.DTOs;
 using BLL.Services;
+using SummerCharity.Filters.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Web.Http;
 namespace SummerCharity.Controllers
 {
     [RoutePrefix("api/role")]
+    [LoggedAdmin]
     public class RoleController : ApiController
     {
         [HttpGet]

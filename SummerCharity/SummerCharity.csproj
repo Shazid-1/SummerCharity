@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CreatorController.cs" />
     <Compile Include="Controllers\DonatorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
@@ -107,6 +108,9 @@
     <Compile Include="Controllers\MembershipCreatorController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Filters\Auth\LoggedAdmin.cs" />
+    <Compile Include="Filters\Auth\LoggedCreator.cs" />
+    <Compile Include="Filters\Auth\LoggedDonator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
