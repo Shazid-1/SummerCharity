@@ -42,17 +42,25 @@ namespace BLL.Services
         }
 
         //Create Creator 
-        public static bool Create(CreatorDTO obj)
+        public static int Create(UserCreatorDTO obj)
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<CreatorDTO, Creator>();
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<UserCreatorDTO, Creator>();
+                cfg.CreateMap<UserCreatorDTO, User>();
             });
 
             var mapper = new Mapper(config);
+            var RId = DataAccess.RoleData().Get().Find(r => r.Name.Equals("CREATOR")).Id;
+            obj.RId = RId;
             var con = mapper.Map<Creator>(obj);
+            var conU = mapper.Map<User>(obj);
 
-            return DataAccess.CreatorData().Create(con);
+            bool CStatus = DataAccess.CreatorData().Create(con);
+            bool StatusU = DataAccess.UserData().Create(conU);
+            if (CStatus && StatusU) return 3;
+            if (StatusU)  return 2;
+            if (CStatus) return 1;
+            else return 0;
         }
 
         //Delete Creator

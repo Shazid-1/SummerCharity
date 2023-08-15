@@ -42,17 +42,26 @@ namespace BLL.Services
         }
 
         //Create Donator 
-        public static bool Create(DonatorDTO obj)
+        public static int Create(UserDonatorDTO obj)
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<DonatorDTO, Donator>();
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<UserDonatorDTO, Donator>();
+                cfg.CreateMap<UserDonatorDTO, User>();
             });
 
             var mapper = new Mapper(config);
+            var RId = DataAccess.RoleData().Get().Find(r => r.Name.Equals("DONATOR")).Id;
+            obj.RId = RId;
+            obj.Balance = 1000; // Default 1k balance upon registration for donators
             var con = mapper.Map<Donator>(obj);
+            var conU = mapper.Map<User>(obj);
 
-            return DataAccess.DonatorData().Create(con);
+            bool Status = DataAccess.DonatorData().Create(con);
+            bool StatusU = DataAccess.UserData().Create(conU);
+            if (Status && StatusU) return 3;
+            if (StatusU) return 2;
+            if (Status) return 1;
+            else return 0;
         }
 
         //Delete Donator

@@ -43,12 +43,16 @@ namespace SummerCharity.Controllers
 
         [HttpPost]
         [Route("api/admin/create")]
-        public HttpResponseMessage Create(AdminDTO admin)
+        public HttpResponseMessage Create(UserAdminDTO admin)
         {
             try
             {
-                AdminService.Create(admin);
-                return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Admin Added" });
+                int code = AdminService.Create(admin);
+                if (code == 3)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Admin Added" });
+                }
+                else return Request.CreateResponse(HttpStatusCode.InternalServerError, new { msg = "Admin was not Added", code });
             }
             catch (Exception e)
             {
