@@ -12,7 +12,6 @@ namespace BLL.Services
 {
     public class CreatorService
     {
-        //get all Creator 
         public static List<CreatorDTO> Get()
         {
             var data = DataAccess.CreatorData().Get();
@@ -25,8 +24,6 @@ namespace BLL.Services
             var con = mapper.Map<List<CreatorDTO>>(data);
             return con;
         }
-
-        //get single Creator
         public static CreatorDTO Get(int id)
         {
             var data = DataAccess.CreatorData().Get(id);
@@ -40,8 +37,6 @@ namespace BLL.Services
             var con = mapper.Map<CreatorDTO>(data);
             return con;
         }
-
-        //Create Creator 
         public static int Create(UserCreatorDTO obj)
         {
             var config = new MapperConfiguration(cfg => {
@@ -62,14 +57,10 @@ namespace BLL.Services
             if (CStatus) return 1;
             else return 0;
         }
-
-        //Delete Creator
         public static bool Delete(int id)
         {
             return DataAccess.CreatorData().Delete(id);
         }
-
-        //Update Creator
         public static bool Update(CreatorDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
@@ -81,6 +72,5 @@ namespace BLL.Services
 
             return DataAccess.CreatorData().Update(con);
         }
-
     }
 }

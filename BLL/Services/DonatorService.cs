@@ -12,7 +12,6 @@ namespace BLL.Services
 {
     public class DonatorService
     {
-        //get all Donator 
         public static List<DonatorDTO> Get()
         {
             var data = DataAccess.DonatorData().Get();
@@ -25,8 +24,6 @@ namespace BLL.Services
             var con = mapper.Map<List<DonatorDTO>>(data);
             return con;
         }
-
-        //get single Donator
         public static DonatorDTO Get(int id)
         {
             var data = DataAccess.DonatorData().Get(id);
@@ -40,8 +37,6 @@ namespace BLL.Services
             var con = mapper.Map<DonatorDTO>(data);
             return con;
         }
-
-        //Create Donator 
         public static int Create(UserDonatorDTO obj)
         {
             var config = new MapperConfiguration(cfg => {
@@ -63,14 +58,10 @@ namespace BLL.Services
             if (Status) return 1;
             else return 0;
         }
-
-        //Delete Donator
         public static bool Delete(int id)
         {
             return DataAccess.DonatorData().Delete(id);
         }
-
-        //Update Donator
         public static bool Update(DonatorDTO obj)
         {
             var config = new MapperConfiguration(cfg =>

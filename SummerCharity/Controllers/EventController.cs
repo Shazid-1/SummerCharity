@@ -9,10 +9,11 @@ using System.Web.Http;
 
 namespace SummerCharity.Controllers
 {
+    [RoutePrefix("api/event")]
     public class EventController : ApiController
     {
         [HttpGet]
-        [Route("api/event/all")]
+        [Route("all")]
         public HttpResponseMessage Get()
         {
             try
@@ -25,9 +26,8 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
         [HttpGet]
-        [Route("api/event/{id}")]
+        [Route("get/{id}")]
         public HttpResponseMessage Get(int id)
         {
             try
@@ -40,9 +40,8 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
         [HttpPost]
-        [Route("api/event/create")]
+        [Route("create")]
         public HttpResponseMessage Create(EventDTO admin)
         {
             try
@@ -56,9 +55,8 @@ namespace SummerCharity.Controllers
             }
 
         }
-
         [HttpDelete]
-        [Route("api/event/delete")]
+        [Route("delete/{id}")]
         public HttpResponseMessage Delete(int id)
         {
             try
@@ -71,9 +69,8 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
         [HttpPatch]
-        [Route("api/event/update")]
+        [Route("update")]
         public HttpResponseMessage Update(EventDTO admin)
         {
             try

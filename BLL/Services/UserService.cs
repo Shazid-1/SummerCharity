@@ -25,7 +25,7 @@ namespace BLL.Services
         }
         public static UserDTO Get(string username)
         {
-            var data = DataAccess.UserData().Get(username);
+            var data = DataAccess.UserData().Get(username.ToLower());
             var mapper = MapperService<User, UserDTO>.GetMapper();
             return mapper.Map<UserDTO>(data);
         }
@@ -37,7 +37,7 @@ namespace BLL.Services
         }
         public static bool Delete(string username)
         {
-            return DataAccess.UserData().Delete(username);
+            return DataAccess.UserData().Delete(username.ToLower());
         }
     }
 }
