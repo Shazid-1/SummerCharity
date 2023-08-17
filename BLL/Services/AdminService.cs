@@ -12,7 +12,6 @@ namespace BLL.Services
 {
     public class AdminService
     {
-        //get all admin 
         public static List<AdminDTO>Get()
         {
             var data = DataAccess.AdminData().Get();
@@ -25,8 +24,6 @@ namespace BLL.Services
             var con = mapper.Map<List<AdminDTO>>(data);
             return con;
         }
-
-        //get single admin
         public static AdminDTO Get(int id)
         {
             var data = DataAccess.AdminData().Get(id);
@@ -40,8 +37,6 @@ namespace BLL.Services
             var con = mapper.Map<AdminDTO>(data);
             return con;
         }
-
-        //Create Admin 
         public static int Create(UserAdminDTO obj)
         {
             var config = new MapperConfiguration(cfg => {
@@ -62,14 +57,10 @@ namespace BLL.Services
             if (Status) return 1;
             else return 0;
         }
-        
-        //Delete Admin
         public static bool Delete(int id)
         {
             return DataAccess.AdminData().Delete(id);
         }
-
-        //Update Admin
         public static bool Update(AdminDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
