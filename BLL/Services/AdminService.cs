@@ -12,10 +12,9 @@ namespace BLL.Services
 {
     public class AdminService
     {
-        //get all admin 
         public static List<AdminDTO>Get()
         {
-            var data = DataAccessFactory.AdminData().Get();
+            var data = DataAccess.AdminData().Get();
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -25,11 +24,9 @@ namespace BLL.Services
             var con = mapper.Map<List<AdminDTO>>(data);
             return con;
         }
-
-        //get single admin
         public static AdminDTO Get(int id)
         {
-            var data = DataAccessFactory.AdminData().Get(id);
+            var data = DataAccess.AdminData().Get(id);
             
             var config = new MapperConfiguration(cfg =>
             {
@@ -40,28 +37,30 @@ namespace BLL.Services
             var con = mapper.Map<AdminDTO>(data);
             return con;
         }
-
-        //Create Admin 
-        public static bool Create(AdminDTO obj)
+        public static int Create(UserAdminDTO obj)
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<AdminDTO, Admin>();
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<UserAdminDTO, Admin>();
+                cfg.CreateMap<UserAdminDTO, User>();
             });
 
             var mapper = new Mapper(config);
+            var RId = DataAccess.RoleData().Get("ADMIN").Id;
+            obj.RId = RId;
             var con = mapper.Map<Admin>(obj);
+            var conU = mapper.Map<User>(obj);
 
-            return DataAccessFactory.AdminData().Create(con);
+            bool Status = DataAccess.AdminData().Create(con);
+            bool StatusU = DataAccess.UserData().Create(conU);
+            if (Status && StatusU) return 3;
+            if (StatusU) return 2;
+            if (Status) return 1;
+            else return 0;
         }
-        
-        //Delete Admin
         public static bool Delete(int id)
         {
-            return DataAccessFactory.AdminData().Delete(id);
+            return DataAccess.AdminData().Delete(id);
         }
-
-        //Update Admin
         public static bool Update(AdminDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
@@ -71,7 +70,7 @@ namespace BLL.Services
             var mapper = new Mapper(config);
             var con = mapper.Map<Admin>(obj);
 
-            return DataAccessFactory.AdminData().Update(con);
+            return DataAccess.AdminData().Update(con);
         }
     }
 }

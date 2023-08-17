@@ -9,10 +9,11 @@ using System.Web.Http;
 
 namespace SummerCharity.Controllers
 {
+    [RoutePrefix("api/donator")]
     public class DonatorController : ApiController
     {
         [HttpGet]
-        [Route("api/donator/all")]
+        [Route("all")]
         public HttpResponseMessage Get()
         {
             try
@@ -25,9 +26,8 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
         [HttpGet]
-        [Route("api/donator/{id}")]
+        [Route("get/{id}")]
         public HttpResponseMessage Get(int id)
         {
             try
@@ -40,15 +40,18 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
         [HttpPost]
-        [Route("api/donator/create")]
-        public HttpResponseMessage Create(DonatorDTO donator)
+        [Route("create")]
+        public HttpResponseMessage Create(UserDonatorDTO donator)
         {
             try
             {
-                DonatorService.Create(donator);
-                return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Donator Added" });
+                int code = DonatorService.Create(donator);
+                if (code == 3)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Donator Added" });
+                }
+                else return Request.CreateResponse(HttpStatusCode.InternalServerError, new { msg = "Donator was not Added", code });
             }
             catch (Exception e)
             {
@@ -56,9 +59,8 @@ namespace SummerCharity.Controllers
             }
 
         }
-
         [HttpDelete]
-        [Route("api/donator/delete")]
+        [Route("delete/{id}")]
         public HttpResponseMessage Delete(int id)
         {
             try
@@ -71,9 +73,8 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
         [HttpPatch]
-        [Route("api/donator/update")]
+        [Route("update")]
         public HttpResponseMessage Update(DonatorDTO donator)
         {
             try

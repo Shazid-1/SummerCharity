@@ -9,10 +9,11 @@ using System.Web.Http;
 
 namespace SummerCharity.Controllers
 {
+    [RoutePrefix("api/creator")]
     public class CreatorController : ApiController
     {
         [HttpGet]
-        [Route("api/creator/all")]
+        [Route("all")]
         public HttpResponseMessage Get()
         {
             try
@@ -27,7 +28,7 @@ namespace SummerCharity.Controllers
         }
 
         [HttpGet]
-        [Route("api/creator/{id}")]
+        [Route("get/{id}")]
         public HttpResponseMessage Get(int id)
         {
             try
@@ -42,13 +43,18 @@ namespace SummerCharity.Controllers
         }
 
         [HttpPost]
-        [Route("api/creator/create")]
-        public HttpResponseMessage Create(CreatorDTO creator)
+        [Route("create")]
+        public HttpResponseMessage Create(UserCreatorDTO creator)
         {
             try
             {
-                CreatorService.Create(creator);
-                return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Creator Added" });
+                int code = CreatorService.Create(creator);
+                if(code == 3)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Creator Added" });
+                }
+                else return Request.CreateResponse(HttpStatusCode.InternalServerError, new { msg = "Creator was not Added", code });
+
             }
             catch (Exception e)
             {
@@ -58,7 +64,7 @@ namespace SummerCharity.Controllers
         }
 
         [HttpDelete]
-        [Route("api/creator/delete")]
+        [Route("delete/{id}")]
         public HttpResponseMessage Delete(int id)
         {
             try
@@ -73,7 +79,7 @@ namespace SummerCharity.Controllers
         }
 
         [HttpPatch]
-        [Route("api/creator/update")]
+        [Route("update")]
         public HttpResponseMessage Update(CreatorDTO c)
         {
             try

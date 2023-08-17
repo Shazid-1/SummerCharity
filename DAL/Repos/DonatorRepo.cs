@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repos
 {
-    internal class DonatorRepo : Repo, IRepo<Donator, int, bool>
+    internal class DonatorRepo : Repo, IUname<Donator, int, bool>
     {
         public bool Create(Donator obj)
         {
@@ -31,6 +31,11 @@ namespace DAL.Repos
         public Donator Get(int id)
         {
             return db.Donators.Find(id);
+        }
+
+        public Donator Get(string uname)
+        {
+            return db.Donators.FirstOrDefault(x => x.Username.Equals(uname));
         }
 
         public bool Update(Donator obj)

@@ -12,10 +12,9 @@ namespace BLL.Services
 {
     public class EventService
     {
-        //get all Event 
         public static List<EventDTO> Get()
         {
-            var data = DataAccessFactory.EventData().Get();
+            var data = DataAccess.EventData().Get();
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -25,11 +24,9 @@ namespace BLL.Services
             var con = mapper.Map<List<EventDTO>>(data);
             return con;
         }
-
-        //get single Event
         public static EventDTO Get(int id)
         {
-            var data = DataAccessFactory.EventData().Get(id);
+            var data = DataAccess.EventData().Get(id);
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -40,8 +37,6 @@ namespace BLL.Services
             var con = mapper.Map<EventDTO>(data);
             return con;
         }
-
-        //Create Event 
         public static bool Create(EventDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
@@ -52,16 +47,12 @@ namespace BLL.Services
             var mapper = new Mapper(config);
             var con = mapper.Map<Event>(obj);
 
-            return DataAccessFactory.EventData().Create(con);
+            return DataAccess.EventData().Create(con);
         }
-
-        //Delete Event
         public static bool Delete(int id)
         {
-            return DataAccessFactory.EventData().Delete(id);
+            return DataAccess.EventData().Delete(id);
         }
-
-        //Update Event
         public static bool Update(EventDTO obj)
         {
             var config = new MapperConfiguration(cfg =>
@@ -71,7 +62,7 @@ namespace BLL.Services
             var mapper = new Mapper(config);
             var con = mapper.Map<Event>(obj);
 
-            return DataAccessFactory.EventData().Update(con);
+            return DataAccess.EventData().Update(con);
         }
     }
 }

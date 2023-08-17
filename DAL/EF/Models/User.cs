@@ -12,7 +12,6 @@ namespace DAL.EF.Models
     {
         [Key] public string Username { get; set; }
         public string Password { get; set; }
-        public int UserId { get; set; }
         [ForeignKey("Role")] public int RId { get; set; }
         public virtual Role Role { get; set; }
     }

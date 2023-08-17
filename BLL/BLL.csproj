@@ -50,12 +50,26 @@
     <Compile Include="DTOs\DonatorDTO.cs" />
     <Compile Include="DTOs\EventDonatorDTO.cs" />
     <Compile Include="DTOs\EventDTO.cs" />
+    <Compile Include="DTOs\MembershipCreatorDTO.cs" />
+    <Compile Include="DTOs\MembershipDTO.cs" />
+    <Compile Include="DTOs\RoleDTO.cs" />
+    <Compile Include="DTOs\TokenDTO.cs" />
+    <Compile Include="DTOs\UserAdminDTO.cs" />
+    <Compile Include="DTOs\UserCreatorDTO.cs" />
+    <Compile Include="DTOs\UserDonatorDTO.cs" />
+    <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdminService.cs" />
+    <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\CreatorService.cs" />
     <Compile Include="Services\DonatorService.cs" />
     <Compile Include="Services\EventDonatorService.cs" />
     <Compile Include="Services\EventService.cs" />
+    <Compile Include="Services\MapperService.cs" />
+    <Compile Include="Services\MembershipCreatorService.cs" />
+    <Compile Include="Services\MembershipService.cs" />
+    <Compile Include="Services\RoleService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
