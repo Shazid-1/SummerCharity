@@ -10,7 +10,7 @@ namespace DAL.EF.Models
     public class MembershipCreator
     {
         public int Id { get; set; }
-        public DateTime Validity { get; set; }
+        public DateTime? Validity { get; set; }
         [ForeignKey("Creator")] public int CId { get; set; }
         [ForeignKey("Membership")] public int MId { get; set; }
         public virtual Creator Creator { get; set; }
