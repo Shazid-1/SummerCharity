@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class EventService
+    public partial class EventService
     {
         public static List<EventDTO> Get()
         {
