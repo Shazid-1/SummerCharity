@@ -1,0 +1,5 @@
+Ashrafee ->
+1.View Pending Event:(api/event/pending)
+2.Event Apporve: (api/event/approve/{id})
+3.Get by title(event) : (api/event/view/{title})
+4.Get by date(event) : (api/event/view/{date})
