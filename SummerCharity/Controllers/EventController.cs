@@ -42,11 +42,11 @@ namespace SummerCharity.Controllers
         }
         [HttpPost]
         [Route("create")]
-        public HttpResponseMessage Create(EventDTO admin)
+        public HttpResponseMessage Create(EventDTO eventDTO)
         {
             try
             {
-                EventService.Create(admin);
+                EventService.Create(eventDTO);
                 return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Event Added" });
             }
             catch (Exception e)
@@ -71,12 +71,27 @@ namespace SummerCharity.Controllers
         }
         [HttpPatch]
         [Route("update")]
-        public HttpResponseMessage Update(EventDTO admin)
+        public HttpResponseMessage Update(EventDTO eventDTO)
         {
             try
             {
-                EventService.Update(admin);
+                EventService.Update(eventDTO);
                 return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Updated" });
+
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+        [HttpPost]
+        [Route("request")]
+        public HttpResponseMessage EventRequest(EventDTO eventDTO)
+        {
+            try
+            {
+                EventService.EventRequest(eventDTO, Request.Headers.Authorization.ToString());
+                return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Requested" });
 
             }
             catch (Exception e)
