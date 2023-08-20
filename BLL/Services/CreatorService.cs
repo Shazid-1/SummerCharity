@@ -42,6 +42,7 @@ namespace BLL.Services
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<UserCreatorDTO, Creator>();
                 cfg.CreateMap<UserCreatorDTO, User>();
+                cfg.CreateMap<UserCreatorDTO, MembershipCreator>();
             });
 
             var mapper = new Mapper(config);
@@ -50,11 +51,22 @@ namespace BLL.Services
             var con = mapper.Map<Creator>(obj);
             var conU = mapper.Map<User>(obj);
 
-            bool CStatus = DataAccess.CreatorData().Create(con);
+            bool StatusC = DataAccess.CreatorData().Create(con);
             bool StatusU = DataAccess.UserData().Create(conU);
-            if (CStatus && StatusU) return 3;
-            if (StatusU)  return 2;
-            if (CStatus) return 1;
+
+            obj.MId = DataAccess.MembershipData().Get().Find(x => x.Type.Equals(obj.Type)).Id;
+            obj.CId = DataAccess.CreatorData().Get(obj.Username).Id;
+            obj.Validity = null;
+            var conM = mapper.Map<MembershipCreator>(obj);
+            bool StatusM = DataAccess.MembershipCreatorData().Create(conM);
+
+            if (StatusC && StatusU && StatusM) return 7;
+            if (StatusC && StatusU)  return 6;
+            if (StatusM && StatusU) return 5;
+            if (StatusC && StatusM) return 4;
+            if (StatusC) return 3;
+            if (StatusU) return 2;
+            if (StatusM) return 1;
             else return 0;
         }
         public static bool Delete(int id)
