@@ -60,7 +60,7 @@ namespace BLL.Services
             var conM = mapper.Map<MembershipCreator>(obj);
             bool StatusM = DataAccess.MembershipCreatorData().Create(conM);
 
-            if (StatusC && StatusU && StatusM) return 200;
+            if (StatusC && StatusU && StatusM) return 7;
             if (StatusC && StatusU)  return 6;
             if (StatusM && StatusU) return 5;
             if (StatusC && StatusM) return 4;

@@ -49,11 +49,12 @@ namespace SummerCharity.Controllers
             try
             {
                 int code = CreatorService.Create(creator);
-                if(code == 200)
+                if(code == 7)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Creator Added" });
                 }
                 else return Request.CreateResponse(HttpStatusCode.InternalServerError, new { msg = "Creator was not Added", code });
+
             }
             catch (Exception e)
             {

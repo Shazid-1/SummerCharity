@@ -9,9 +9,3 @@ BLL/obj/Release/
 DAL/obj/Release/
 SummerCharity/obj/Release/
 SummerCharity/Web.config
-SummerCharity/bin/BLL.dll
-SummerCharity/bin/BLL.pdb
-SummerCharity/bin/DAL.dll
-SummerCharity/bin/DAL.pdb
-SummerCharity/bin/SummerCharity.dll
-SummerCharity/bin/SummerCharity.pdb
