@@ -65,7 +65,6 @@
     <Compile Include="Services\DonatorService.cs" />
     <Compile Include="Services\EventDonatorService.cs" />
     <Compile Include="Services\EventService.cs" />
-    <Compile Include="Services\EventService.Feature.cs" />
     <Compile Include="Services\MapperService.cs" />
     <Compile Include="Services\MembershipCreatorService.cs" />
     <Compile Include="Services\MembershipService.cs" />

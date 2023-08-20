@@ -42,11 +42,11 @@ namespace SummerCharity.Controllers
         }
         [HttpPost]
         [Route("create")]
-        public HttpResponseMessage Create(EventDTO eventDTO)
+        public HttpResponseMessage Create(EventDTO admin)
         {
             try
             {
-                EventService.Create(eventDTO);
+                EventService.Create(admin);
                 return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Event Added" });
             }
             catch (Exception e)
@@ -71,11 +71,11 @@ namespace SummerCharity.Controllers
         }
         [HttpPatch]
         [Route("update")]
-        public HttpResponseMessage Update(EventDTO eventDTO)
+        public HttpResponseMessage Update(EventDTO admin)
         {
             try
             {
-                EventService.Update(eventDTO);
+                EventService.Update(admin);
                 return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Updated" });
 
             }
@@ -84,15 +84,62 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-        [HttpPost]
-        [Route("request")]
-        public HttpResponseMessage EventRequest(EventDTO eventDTO)
+
+        [HttpGet]
+        [Route("approve/{id}")]
+        public HttpResponseMessage AdminApprove(int id)
         {
             try
             {
-                EventService.EventRequest(eventDTO, Request.Headers.Authorization.ToString());
-                return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Requested" });
+                var tk = Request.Headers.Authorization.ToString();
+                var data = EventService.Approve(id,tk);
+                return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Event Approved"});
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
 
+        [HttpGet]
+        [Route("pending")]
+        public HttpResponseMessage PendingEvents()
+        {
+            try
+            {
+                var data = EventService.GetPendingEvent(); 
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("view/{date}")]
+        public HttpResponseMessage GetByDate(DateTime d)
+        {
+            try
+            {
+                var data = EventService.GetByDate(d);
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("view/{title}")]
+        public HttpResponseMessage GetByTitle(string title)
+        {
+            try
+            {
+                var data = EventService.GetByTitle(title);
+                return Request.CreateResponse(HttpStatusCode.OK, data);
             }
             catch (Exception e)
             {
