@@ -47,13 +47,13 @@ namespace BLL.Services
             var user = (from u in DataAccess.TokenData().Get()
                         where u.Key.Equals(token)
                         select u).FirstOrDefault();
-            var admin = (from a in DataAccess.TokenData().Get()
+            var admin = (from a in DataAccess.AdminData().Get()
                          where a.Username.Equals(user.Username)
                          select a).FirstOrDefault();
 
             if(admin == null)
             {
-                return false; // no admin found.
+                return false; // no admin found. invalid request
             }
             else
             {
