@@ -60,8 +60,8 @@ namespace BLL.Services
                 var mc =(from mcr in DataAccess.MembershipCreatorData().Get()
                          where mcr.CId == cid
                          select mcr).FirstOrDefault();
-                var renew = mc.Validity.AddDays(30); //add 30 days
-                mc.Validity = renew; // set new validity
+                var newdate = DateTime.Now.AddDays(30); //add thirty days from current date
+                mc.Validity = newdate; // set new validity
 
                 return DataAccess.MembershipCreatorData().Update(mc); //finally update
             }

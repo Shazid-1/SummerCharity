@@ -112,7 +112,7 @@ namespace BLL.Services
                 var membership = (from c in DataAccess.MembershipCreatorData().Get()
                                   where c.CId == creatorId
                                   select c).FirstOrDefault();
-                TimeSpan timediff = membership.Validity - DateTime.Now;
+                TimeSpan timediff = (TimeSpan)(membership.Validity - DateTime.Now);
 
                 if (timediff > TimeSpan.Zero)
                 {
