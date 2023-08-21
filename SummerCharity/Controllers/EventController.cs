@@ -1,5 +1,6 @@
 ﻿using BLL.DTOs;
 using BLL.Services;
+using SummerCharity.Filters.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -140,6 +141,25 @@ namespace SummerCharity.Controllers
             {
                 var data = EventService.GetByTitle(title);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+        [LoggedCreator]
+        [HttpPost]
+        [Route("request")]
+        public HttpResponseMessage EventRequest(EventDTO eventDTO)
+        {
+            try
+            {
+                int code = EventService.EventRequest(eventDTO, Request.Headers.Authorization.ToString());
+                if (code == 200)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Event Requested" });
+                }
+                else return Request.CreateResponse(HttpStatusCode.InternalServerError, new { msg = "Event Request Failed", code });
             }
             catch (Exception e)
             {
