@@ -106,10 +106,28 @@ namespace BLL.Services
                 var admin = (from a in DataAccess.AdminData().Get()
                              where a.Username.Equals(username)
                              select a).SingleOrDefault();
+                var creatorId = (from c in DataAccess.EventData().Get()
+                               where c.Id == eid
+                               select c.CId).FirstOrDefault();
+                var membership = (from c in DataAccess.MembershipCreatorData().Get()
+                                  where c.CId == creatorId
+                                  select c).FirstOrDefault();
+                TimeSpan timediff = membership.Validity - DateTime.Now;
 
-                e.AId = admin.Id;
-           
-                return DataAccess.EventData().Update(e); //finally we update the database
+                if (timediff > TimeSpan.Zero)
+                {
+                    var max = membership.Membership.MaxGoal;
+                    var fundcheck = max - e.Goal;
+
+                    if (fundcheck >= 0)
+                    {
+                        e.AId = admin.Id;
+                        return DataAccess.EventData().Update(e); //finally we update the database
+                    }
+                    return false;
+                }
+                else return false;
+                
             }
             catch (Exception)
             {

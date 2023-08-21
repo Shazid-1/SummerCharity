@@ -39,5 +39,33 @@ namespace BLL.Services
         {
             return DataAccess.MembershipCreatorData().Delete(id);
         }
+
+        //membership approval. Do it after finishing event service
+        public static bool MembershipApprove(int cid,string token)
+        {
+            var m = DataAccess.MembershipCreatorData().Get();
+            var user = (from u in DataAccess.TokenData().Get()
+                        where u.Key.Equals(token)
+                        select u).FirstOrDefault();
+            var admin = (from a in DataAccess.TokenData().Get()
+                         where a.Username.Equals(user.Username)
+                         select a).FirstOrDefault();
+
+            if(admin == null)
+            {
+                return false; // no admin found.
+            }
+            else
+            {
+                var mc =(from mcr in DataAccess.MembershipCreatorData().Get()
+                         where mcr.CId == cid
+                         select mcr).FirstOrDefault();
+                var renew = mc.Validity.AddDays(30); //add 30 days
+                mc.Validity = renew; // set new validity
+
+                return DataAccess.MembershipCreatorData().Update(mc); //finally update
+            }
+            
+        }
     }
 }
