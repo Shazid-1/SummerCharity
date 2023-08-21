@@ -87,44 +87,12 @@ namespace SummerCharity.Controllers
         }
 
         [HttpGet]
-        [Route("approve/{id}")]
-        public HttpResponseMessage AdminApprove(int id)
+        [Route("date/{date}")]
+        public HttpResponseMessage GetByDate(DateTime date)
         {
             try
             {
-                var tk = Request.Headers.Authorization.ToString();
-                var data = EventService.Approve(id,tk);
-                return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Event Approved"});
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("pending")]
-        public HttpResponseMessage PendingEvents()
-        {
-            try
-            {
-                var data = EventService.GetPendingEvent(); 
-                return Request.CreateResponse(HttpStatusCode.OK, data);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
-
-        }
-
-        [HttpGet]
-        [Route("view/{date}")]
-        public HttpResponseMessage GetByDate(DateTime d)
-        {
-            try
-            {
-                var data = EventService.GetByDate(d);
+                var data = EventService.GetByDate(date);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
             catch (Exception e)
@@ -132,9 +100,8 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
         [HttpGet]
-        [Route("view/{title}")]
+        [Route("title/{title}")]
         public HttpResponseMessage GetByTitle(string title)
         {
             try
@@ -150,16 +117,48 @@ namespace SummerCharity.Controllers
         [LoggedCreator]
         [HttpPost]
         [Route("request")]
-        public HttpResponseMessage EventRequest(EventDTO eventDTO)
+        public HttpResponseMessage EventRequest(EventDTO obj)
         {
             try
             {
-                int code = EventService.EventRequest(eventDTO, Request.Headers.Authorization.ToString());
+                int code = EventService.EventRequest(obj, Request.Headers.Authorization.ToString());
                 if (code == 200)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Event Requested" });
                 }
                 else return Request.CreateResponse(HttpStatusCode.InternalServerError, new { msg = "Event Request Failed", code });
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+        [LoggedAdmin]
+        [HttpGet]
+        [Route("pending")]
+        public HttpResponseMessage PendingEvents()
+        {
+            try
+            {
+                var data = EventService.GetPendingEvent();
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+
+        }
+        [LoggedAdmin]
+        [HttpGet]
+        [Route("approve/{id}")]
+        public HttpResponseMessage AdminApprove(int id)
+        {
+            try
+            {
+                var tk = Request.Headers.Authorization.ToString();
+                var data = EventService.Approve(id,tk);
+                return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Event Approved"});
             }
             catch (Exception e)
             {

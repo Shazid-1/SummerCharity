@@ -84,16 +84,13 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Msg = ex.Message });
             }
         }
-
-        //remember to annote loggedAdmin
         [HttpGet]
-        [Route("approve/{cid}")]
-        public HttpResponseMessage Approve(int cid)
+        [Route("approve/{id}")]
+        public HttpResponseMessage Approve(int id)
         {
             try
             {
-                var tk = Request.Headers.Authorization.ToString();
-                var data = MembershipCreatorService.MembershipApprove(cid, tk);
+                var data = MembershipCreatorService.Approve(id);
                 return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Membership Approved" });
             }
             catch (Exception e)
