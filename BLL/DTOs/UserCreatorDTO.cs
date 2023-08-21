@@ -10,5 +10,9 @@ namespace BLL.DTOs
     {
         public string Password { get; set; }
         public int RId { get; set; }
+        public int CId { get; set; }
+        public int MId { get; set; }
+        public string Type { get; set; }
+        public DateTime? Validity { get; set; }
     }
 }
