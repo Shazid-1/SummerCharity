@@ -3,3 +3,7 @@ Ashrafee ->
 2.Event Apporve: (api/event/approve/{id})
 3.Get by title(event) : (api/event/view/{title})
 4.Get by date(event) : (api/event/view/{date})
+
+Shazid ->
+1.Login: [api/auth/login]
+2.Request Event: [api/event/request]

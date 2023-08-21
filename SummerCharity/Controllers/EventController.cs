@@ -1,5 +1,6 @@
 ﻿using BLL.DTOs;
 using BLL.Services;
+using SummerCharity.Filters.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,6 +87,70 @@ namespace SummerCharity.Controllers
         }
 
         [HttpGet]
+        [Route("date/{date}")]
+        public HttpResponseMessage GetByDate(DateTime date)
+        {
+            try
+            {
+                var data = EventService.GetByDate(date);
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+        [HttpGet]
+        [Route("title/{title}")]
+        public HttpResponseMessage GetByTitle(string title)
+        {
+            try
+            {
+                var data = EventService.GetByTitle(title);
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+        [LoggedCreator]
+        [HttpPost]
+        [Route("request")]
+        public HttpResponseMessage EventRequest(EventDTO obj)
+        {
+            try
+            {
+                int code = EventService.EventRequest(obj, Request.Headers.Authorization.ToString());
+                if (code == 200)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Event Requested" });
+                }
+                else return Request.CreateResponse(HttpStatusCode.InternalServerError, new { msg = "Event Request Failed", code });
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+        [LoggedAdmin]
+        [HttpGet]
+        [Route("pending")]
+        public HttpResponseMessage PendingEvents()
+        {
+            try
+            {
+                var data = EventService.GetPendingEvent();
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+
+        }
+        [LoggedAdmin]
+        [HttpGet]
         [Route("approve/{id}")]
         public HttpResponseMessage AdminApprove(int id)
         {
@@ -94,52 +159,6 @@ namespace SummerCharity.Controllers
                 var tk = Request.Headers.Authorization.ToString();
                 var data = EventService.Approve(id,tk);
                 return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Event Approved"});
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("pending")]
-        public HttpResponseMessage PendingEvents()
-        {
-            try
-            {
-                var data = EventService.GetPendingEvent(); 
-                return Request.CreateResponse(HttpStatusCode.OK, data);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
-
-        }
-
-        [HttpGet]
-        [Route("view/{date}")]
-        public HttpResponseMessage GetByDate(DateTime d)
-        {
-            try
-            {
-                var data = EventService.GetByDate(d);
-                return Request.CreateResponse(HttpStatusCode.OK, data);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("view/{title}")]
-        public HttpResponseMessage GetByTitle(string title)
-        {
-            try
-            {
-                var data = EventService.GetByTitle(title);
-                return Request.CreateResponse(HttpStatusCode.OK, data);
             }
             catch (Exception e)
             {
