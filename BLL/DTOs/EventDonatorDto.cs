@@ -10,8 +10,8 @@ namespace BLL.DTOs
     {
         public int Id { get; set; }
         public int Donation { get; set; }
-        public DateTime Time { get; set; }
-        public int DId { get; set; }
+        public DateTime? Time { get; set; }
+        public int? DId { get; set; }
         public int EId { get; set; }
     }
 }

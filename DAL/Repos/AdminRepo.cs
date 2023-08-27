@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repos
 {
-    internal class AdminRepo : Repo, IUname<Admin, int, bool>
+    internal class AdminRepo : Repo, IName<Admin, int, bool>
     {
         public bool Create(Admin obj)
         {

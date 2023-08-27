@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repos
 {
-    internal class UserRepo : Repo, IUname<User, string, bool>, IAuth
+    internal class UserRepo : Repo, IName<User, string, bool>, IAuth
     {
         public bool Create(User obj)
         {

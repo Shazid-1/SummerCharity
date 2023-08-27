@@ -12,7 +12,7 @@ namespace BLL.DTOs
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime StartAt { get; set; }
-        public DateTime EndAt { get; set; }
+        public DateTime? EndAt { get; set; }
         public int Goal { get; set; }
         public int Fund { get; set; }
         public int? AId { get; set; }

@@ -1,9 +1,14 @@
 Ashrafee ->
 1.View Pending Event:(api/event/pending)
 2.Event Apporve: (api/event/approve/{id})
-3.Get by title(event) : (api/event/view/{title})
-4.Get by date(event) : (api/event/view/{date})
+3.Get by title(event) : (api/event/title/{title})
+4.Get by date(event) : (api/event/date/{date})
 
 Shazid ->
 1.Login: [api/auth/login]
 2.Request Event: [api/event/request]
+3.Get pending events by title: [api/event/pending/title/{title}]
+4.Get pending events by date: [api/event/pending/date/{date}]
+5.Query ?state with: [api/event/title/{title}?state={state}]
+6.Query ?state with: [api/event/date/{date}?state={state}]
+7.Donate: [api/eventdonator/donate]

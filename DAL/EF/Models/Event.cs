@@ -13,7 +13,7 @@ namespace DAL.EF.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime StartAt { get; set; }
-        public DateTime EndAt { get; set; }
+        public DateTime? EndAt { get; set; }
         public int Goal { get; set; }
         public int Fund { get; set; }
         [ForeignKey("Admin")] public int? AId { get; set; }
