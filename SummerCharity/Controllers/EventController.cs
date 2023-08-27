@@ -85,14 +85,15 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
+        // FEATURES
         [HttpGet]
         [Route("date/{date}")]
         public HttpResponseMessage GetByDate(DateTime date)
         {
             try
             {
-                var data = EventService.GetByDate(date);
+                var queryParams = Request.GetQueryNameValuePairs();
+                var data = EventService.GetByDate(date, queryParams);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
             catch (Exception e)
@@ -106,7 +107,38 @@ namespace SummerCharity.Controllers
         {
             try
             {
-                var data = EventService.GetByTitle(title);
+                var queryParams = Request.GetQueryNameValuePairs();
+                var data = EventService.GetByTitle(title, queryParams);
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+        [LoggedAdmin]
+        [HttpGet]
+        [Route("pending/date/{date}")]
+        public HttpResponseMessage GetPendingByDate(DateTime date)
+        {
+            try
+            {
+                var data = EventService.GetPendingByDate(date);
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+        [LoggedAdmin]
+        [HttpGet]
+        [Route("pending/title/{title}")]
+        public HttpResponseMessage GetPendingByTitle(string title)
+        {
+            try
+            {
+                var data = EventService.GetPendingByTitle(title);
                 return Request.CreateResponse(HttpStatusCode.OK, data);
             }
             catch (Exception e)

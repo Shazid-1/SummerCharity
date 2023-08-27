@@ -64,7 +64,9 @@
     <Compile Include="Services\CreatorService.cs" />
     <Compile Include="Services\DonatorService.cs" />
     <Compile Include="Services\EventDonatorService.cs" />
+    <Compile Include="Services\EventDonatorService.Feature.cs" />
     <Compile Include="Services\EventService.cs" />
+    <Compile Include="Services\EventService.Extension.cs" />
     <Compile Include="Services\EventService.Feature.cs" />
     <Compile Include="Services\MapperService.cs" />
     <Compile Include="Services\MembershipCreatorService.cs" />
@@ -78,7 +80,9 @@
       <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repos
 {
-    internal class DonatorRepo : Repo, IUname<Donator, int, bool>
+    internal class DonatorRepo : Repo, IName<Donator, int, bool>
     {
         public bool Create(Donator obj)
         {

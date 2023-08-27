@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    public interface IUname<CLASS, ID, RET>
+    public interface IName<CLASS, ID, RET>
     {
         List<CLASS> Get();
         CLASS Get(ID id);
-        CLASS Get(string uname);
+        CLASS Get(string name);
         RET Create(CLASS obj);
         RET Update(CLASS obj);
         bool Delete(ID id);

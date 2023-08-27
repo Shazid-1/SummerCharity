@@ -1,5 +1,6 @@
 ﻿using BLL.DTOs;
 using BLL.Services;
+using SummerCharity.Filters.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,6 +79,26 @@ namespace SummerCharity.Controllers
                 EventDonatorService.Update(admin);
                 return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Updated" });
 
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+        // FEATURES
+        [LoggedDonator]
+        [HttpPost]
+        [Route("donate")]
+        public HttpResponseMessage Donate(EventDonatorDTO obj)
+        {
+            try
+            {
+                int code = EventDonatorService.Donate(obj, Request.Headers.Authorization.ToString());
+                if (code == 200)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Donated" });
+                }
+                else return Request.CreateResponse(HttpStatusCode.InternalServerError, new { msg = "Donation Failed", code });
             }
             catch (Exception e)
             {

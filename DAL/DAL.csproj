@@ -65,7 +65,7 @@
     <Compile Include="EF\Models\User.cs" />
     <Compile Include="EF\SCContext.cs" />
     <Compile Include="Interfaces\IAuth.cs" />
-    <Compile Include="Interfaces\IUname.cs" />
+    <Compile Include="Interfaces\IName.cs" />
     <Compile Include="Interfaces\IRepo.cs" />
     <Compile Include="Migrations\202308132158537_DbInit.cs" />
     <Compile Include="Migrations\202308132158537_DbInit.designer.cs">
@@ -74,6 +74,10 @@
     <Compile Include="Migrations\202308190437460_NullMembership.cs" />
     <Compile Include="Migrations\202308190437460_NullMembership.designer.cs">
       <DependentUpon>202308190437460_NullMembership.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202308260717003_NullEventEndAt.cs" />
+    <Compile Include="Migrations\202308260717003_NullEventEndAt.designer.cs">
+      <DependentUpon>202308260717003_NullEventEndAt.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202308190437460_NullMembership.resx">
       <DependentUpon>202308190437460_NullMembership.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202308260717003_NullEventEndAt.resx">
+      <DependentUpon>202308260717003_NullEventEndAt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
