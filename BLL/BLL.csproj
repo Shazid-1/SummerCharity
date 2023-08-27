@@ -62,6 +62,7 @@
     <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\CreatorService.cs" />
+    <Compile Include="Services\CreatorService.Feature.cs" />
     <Compile Include="Services\DonatorService.cs" />
     <Compile Include="Services\EventDonatorService.cs" />
     <Compile Include="Services\EventDonatorService.Feature.cs" />
@@ -80,11 +81,10 @@
       <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
+    <Compile Include="Services\DonatorService.Feature.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,6 @@
 ﻿using BLL.DTOs;
 using BLL.Services;
+using SummerCharity.Filters.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,6 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
         [HttpGet]
         [Route("get/{id}")]
         public HttpResponseMessage Get(int id)
@@ -41,7 +41,6 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
         [HttpPost]
         [Route("create")]
         public HttpResponseMessage Create(UserCreatorDTO creator)
@@ -49,7 +48,7 @@ namespace SummerCharity.Controllers
             try
             {
                 int code = CreatorService.Create(creator);
-                if(code == 200)
+                if (code == 200)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Creator Added" });
                 }
@@ -61,7 +60,6 @@ namespace SummerCharity.Controllers
             }
 
         }
-
         [HttpDelete]
         [Route("delete/{id}")]
         public HttpResponseMessage Delete(int id)
@@ -76,7 +74,6 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
         [HttpPatch]
         [Route("update")]
         public HttpResponseMessage Update(CreatorDTO c)
@@ -86,6 +83,22 @@ namespace SummerCharity.Controllers
                 CreatorService.Update(c);
                 return Request.CreateResponse(HttpStatusCode.OK, new { msg = "Updated" });
 
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+        // FEATURES
+        [LoggedCreator]
+        [HttpGet]
+        [Route("history")]
+        public HttpResponseMessage History()
+        {
+            try
+            {
+                var data = CreatorService.History(Request.Headers.Authorization.ToString());
+                return Request.CreateResponse(HttpStatusCode.OK, data);
             }
             catch (Exception e)
             {
