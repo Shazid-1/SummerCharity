@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace SummerCharity.Controllers
 {
@@ -131,6 +132,7 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
+        [EnableCors("*", "*", "*")]
         [LoggedAdmin]
         [HttpGet]
         [Route("pending/title/{title}")]
@@ -165,6 +167,7 @@ namespace SummerCharity.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
+        [EnableCors("*", "*", "*")]
         [LoggedAdmin]
         [HttpGet]
         [Route("pending")]
