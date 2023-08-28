@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular-cookies.min.js"></script> -->
+    <script src="Angular1.6.9.js"></script>
+    <script src="Angular-cookies1.6.9.js"></script>
+  </head>
+  <body ng-app="myApp">
+    <div ng-controller="login-ctrl">
+      <form ng-submit="login()">
+        <label for="uname">Username:</label>
+        <input type="text" id="uname" ng-model="uname" />
+        <label for="pass">Password:</label>
+        <input type="password" id="pass" ng-model="pass" />
+        <button type="submit">Log In</button>
+      </form>
+      <div>
+        <h4 ng-show="resptoken">Welcome, {{ resptoken.Username }}</h4>
+        <pre ng-show="resptokenmsg">{{ resptokenmsg }}</pre>
+      </div>
+      <br />
+    </div>
+    <div ng-controller="event-ctrl">
+      <form ng-submit="pendingEvents()">
+        <label for="pendingname">Event Name:</label>
+        <input type="text" id="pendingname" ng-model="pendingname" />
+        <button type="submit">Search</button>
+      </form>
+      <div ng-show="respevents.length > 0 || respeventmsg">
+        <pre ng-show="respeventmsg">{{ respeventmsg }}</pre>
+        <h4 ng-show="respevents.length > 0">Pending Events:</h4>
+        <table ng-show="respevents.length > 0" border="1">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>StartAt</th>
+              <th>EndAt</th>
+              <th>Goal</th>
+              <th>Fund</th>
+              <th>AId</th>
+              <th>CId</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="event in respevents">
+              <td>{{ event.Id }}</td>
+              <td>{{ event.Title }}</td>
+              <td>{{ event.Description }}</td>
+              <td>{{ event.StartAt }}</td>
+              <td>{{ event.EndAt }}</td>
+              <td>{{ event.Goal }}</td>
+              <td>{{ event.Fund }}</td>
+              <td>{{ event.AId }}</td>
+              <td>{{ event.CId }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+  <script>
+    var baseApi = 'https://localhost:44378'
+    var scapp = angular.module('myApp', ['ngCookies'])
+    scapp.controller('login-ctrl', function ($scope, $http, $cookies) {
+      $scope.uname = ''
+      $scope.pass = ''
+      $scope.resptoken = ''
+      $scope.resptokenmsg = ''
+      $scope.login = function () {
+        var data = { username: $scope.uname, password: $scope.pass }
+        $http
+          .post(`${baseApi}/api/auth/login`, data)
+          .then(function (response) {
+            // $scope.resptoken = JSON.stringify(response.data, null, 2)
+            $scope.resptoken = response.data
+            $scope.resptokenmsg = ''
+
+            var setCookieHeaders = response.headers('Set-Cookie')
+            $cookies.put('sc-key', response.data.Key, {
+              expires: new Date(response.data.ExpiredAt),
+            })
+          })
+          .catch(function (error) {
+            $scope.resptokenmsg = 'Error: ' + error.data.Msg
+          })
+      }
+    })
+    scapp.controller('event-ctrl', function ($scope, $http, $cookies) {
+      $scope.pendingname = ''
+      $scope.respevents = []
+      $scope.respeventmsg = ''
+      $scope.pendingEvents = function () {
+        var eventName = $scope.pendingname
+        var url = ''
+        var config = {
+          headers: {
+            Authorization: $cookies.get('sc-key'),
+          },
+        }
+        if (eventName.length > 0) {
+          url = `${baseApi}/api/event/pending/title/${eventName}`
+        } else {
+          url = `${baseApi}/api/event/pending`
+        }
+        $http
+          .get(url, config)
+          .then(function (response) {
+            $scope.respevents = response.data
+            $scope.respeventmsg = ''
+          })
+          .catch(function (error) {
+            // $scope.respeventmsg = { Msg: 'Error: ' + error.data.Msg }
+            $scope.respeventmsg = 'Error: ' + error.data.Msg
+          })
+      }
+    })
+
+    function setCookies(setCookieHeaders) {
+      // Split and set each cookie using $cookies service
+      angular.forEach(setCookieHeaders, function (setCookieHeader) {
+        // Parse the cookie attributes
+        var cookieAttributes = setCookieHeader.split(';')
+        var cookieValue = null
+        var cookieOptions = {}
+
+        // Loop through attributes to extract key-value pairs
+        for (var i = 0; i < cookieAttributes.length; i++) {
+          var attrParts = cookieAttributes[i].trim().split('=')
+          var attrName = attrParts[0]
+          var attrValue = attrParts[1]
+
+          if (i === 0) {
+            // The first attribute is the cookie value
+            cookieValue = attrValue
+          } else {
+            // Set cookie options (Expires, Path, Domain, Secure, HttpOnly)
+            switch (attrName.toLowerCase()) {
+              case 'expires':
+                cookieOptions.expires = new Date(attrValue)
+                break
+              case 'path':
+                cookieOptions.path = attrValue
+                break
+              case 'domain':
+                cookieOptions.domain = attrValue
+                break
+              case 'secure':
+                cookieOptions.secure = true
+                break
+              case 'httponly':
+                cookieOptions.httpOnly = true
+                break
+            }
+          }
+        }
+
+        // Set the cookie using $cookies service
+        $cookies.put('myCookieName', cookieValue, cookieOptions)
+      })
+    }
+  </script>
+</html>

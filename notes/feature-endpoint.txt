@@ -12,3 +12,5 @@ Shazid ->
 5.Query ?state with: [api/event/title/{title}?state={state}]
 6.Query ?state with: [api/event/date/{date}?state={state}]
 7.Donate: [api/eventdonator/donate]
+8.Donation history of Donator: [api/donator/history]
+9.Event history of Creator: [api/creator/history]

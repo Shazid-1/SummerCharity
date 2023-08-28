@@ -33,9 +33,7 @@ namespace BLL.Services
         {
             var e = DataAccess.EventData().Get(eid);
             if (e.AId != null) return false;
-            var username = (from t in DataAccess.TokenData().Get()
-                            where t.Key.Equals(token)
-                            select t.User.Username).SingleOrDefault();
+            var username = DataAccess.TokenData().Get(token).Username;
             var admin = DataAccess.AdminData().Get(username);
             e.AId = admin.Id;
             return DataAccess.EventData().Update(e); //finally we update the database
