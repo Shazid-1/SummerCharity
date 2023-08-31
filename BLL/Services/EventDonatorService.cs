@@ -18,7 +18,7 @@ namespace BLL.Services
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<EventDonator, DonatorDTO>();
+                cfg.CreateMap<EventDonator, EventDonatorDTO>();
             });
             var mapper = new Mapper(config);
             var con = mapper.Map<List<EventDonatorDTO>>(data);
